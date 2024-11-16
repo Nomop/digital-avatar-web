@@ -29,10 +29,6 @@ public class TestController {
     }
 
 
-
-    @Autowired
-    private UserMapper userMapper;
-
     @Autowired
     private RedisUtil redisUtil;
 

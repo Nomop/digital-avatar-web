@@ -1,6 +1,7 @@
 package com.web.dao;
 
 import com.DigitalAvatarApplication;
+import com.web.domain.GovUser;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,12 +18,11 @@ import java.util.List;
 public class UserMapperTest {
 
     @Autowired
-    private UserMapper userMapper;
+    private GovUserMapper userMapper;
 
     @Test
     public void select() {
-/*        List<User> list = userMapper.selectList(null);
-        Assert.assertEquals(6, list.size());
-        list.forEach(System.out::println);*/
+        GovUser list = userMapper.selectGovUser(1);
+        System.out.println(list);
     }
 }
