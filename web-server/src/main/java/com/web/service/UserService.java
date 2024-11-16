@@ -1,14 +1,14 @@
 package com.web.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.web.domain.SysUser;
+import com.web.domain.GovUser;
 import com.web.vo.LoginVo;
 import com.web.vo.RegisterVo;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.List;
 
-public interface UserService extends IService<SysUser> {
+public interface UserService extends IService<GovUser> {
 
 
     /**
@@ -27,8 +27,8 @@ public interface UserService extends IService<SysUser> {
 
     /**
      * 根据账号获取用户信息
-     * @param account
+     * @param phone
      * @return
      */
-    SysUser getUserInfo(String account);
+    GovUser getUserInfo(String phone);
 }

@@ -2,7 +2,7 @@ package com.web.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.web.constant.ResultCode;
-import com.web.domain.SysUser;
+import com.web.domain.GovUser;
 import com.web.dto.JwtUser;
 import com.web.exception.BusinessException;
 import com.web.service.UserService;
@@ -32,14 +32,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String account) throws UsernameNotFoundException {
         // 获取用户信息
         UserService userService = (UserService) applicationContext.getBean("userServiceImpl");
-        SysUser user = userService.getUserInfo(account);
+        GovUser user = userService.getUserInfo(account);
         if (user == null) {
             throw new BusinessException(ResultCode.USER_NOT_FOUND);
         }
         // 组装成userDetails
         JwtUser jwtUser = new JwtUser(
                 user.getId(),
-                user.getAccount(),
+                user.getUserPhone(),
                 user.getUserName(),
                 user.getPassword(),
                 Collections.emptyList(),
@@ -47,7 +47,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         );
         // 存入Redis
         String s = JSON.toJSONString(jwtUser);
-        redisUtil.set("user:userDetail:" + user.getAccount(), s);
+        redisUtil.set("user:userDetail:" + user.getUserPhone(), s);
         return jwtUser;
     }
 }

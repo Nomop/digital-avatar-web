@@ -5,7 +5,7 @@ import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSON;
 import com.web.constant.ResultCode;
-import com.web.domain.SysUser;
+import com.web.domain.GovUser;
 import com.web.dto.JwtUser;
 import com.web.exception.TokenException;
 import io.jsonwebtoken.*;
@@ -110,13 +110,13 @@ public class JwtUtil {
      * @param user 用户信息
      * @return
      */
-    public String generateToken(SysUser user) {
+    public String generateToken(GovUser user) {
         String token = Jwts.builder()
-                .setSubject(user.getAccount())
+                .setSubject(user.getUserPhone())
                 .setExpiration(generateExpired())
                 .signWith(SignatureAlgorithm.HS512, secret)
                 .compact();
-        String key = "login:" + user.getAccount() + ":" + token;
+        String key = "login:" + user.getUserPhone() + ":" + token;
         redisUtil.set(key, token, expiration);
         return token;
     }

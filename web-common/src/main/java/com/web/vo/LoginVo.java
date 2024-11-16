@@ -8,7 +8,7 @@ import javax.validation.constraints.NotBlank;
 public class LoginVo {
 
     @NotBlank(message = "账号不能为空")
-    private String account;
+    private String phone;
 
     @NotBlank(message = "密码不能为空")
     private String password;

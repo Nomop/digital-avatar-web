@@ -1,7 +1,6 @@
 package com.web.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.web.dao.UserMapper;
 import com.web.dto.WebResult;
 import com.web.util.RedisUtil;
 import io.swagger.annotations.Api;
