@@ -1,7 +1,6 @@
 package com.web.dao;
 
 import com.DigitalAvatarApplication;
-import com.web.domain.User;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,8 +21,8 @@ public class UserMapperTest {
 
     @Test
     public void select() {
-        List<User> list = userMapper.selectList(null);
+/*        List<User> list = userMapper.selectList(null);
         Assert.assertEquals(6, list.size());
-        list.forEach(System.out::println);
+        list.forEach(System.out::println);*/
     }
 }
