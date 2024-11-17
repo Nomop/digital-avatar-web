@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.web.dao.BasicUserInfoMapper">
+    <insert id="insertBasicUserInfo" parameterType="BasicUserInfo" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO avatar.basis_user_info (user_uid, user_identity, user_phone, user_name, user_sex, user_age, user_avatar, user_reg_time)
+        VALUES (#{userUid}, #{userIdentity}, #{userPhone}, #{userName}, #{userSex}, #{userAge}, #{userAvatar}, #{userRegTime});
+    </insert>
+</mapper>
