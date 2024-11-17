@@ -4,21 +4,21 @@
     <select id="selectGovUserById" resultType="GovUser">
         SELECT g.*, b.user_uid, b.user_identity, b.user_phone, b.user_name,
                b.user_sex, b.user_age, b.user_avatar, b.user_reg_time
-        FROM gov_user g
-                 JOIN basic_user_info b ON g.user_id = b.id
+        FROM avatar.gov_info g
+                 JOIN avatar.basis_user_info b ON g.user_id = b.id
         WHERE g.id = #{id}
     </select>
     
     <select id="selectGovUserByPhone" resultType="GovUser">
         SELECT g.*, b.user_uid, b.user_identity, b.user_phone, b.user_name,
                b.user_sex, b.user_age, b.user_avatar, b.user_reg_time
-        FROM gov_user g
-                 JOIN basic_user_info b ON g.user_id = b.id
+        FROM avatar.gov_info g
+                 JOIN avatar.basis_user_info b ON g.user_id = b.id
         WHERE b.user_phone = #{phone}
     </select>
 
     <insert id="insertGovUser" parameterType="GovUser">
-        INSERT INTO gov_user (user_id, password, enabled)
+        INSERT INTO avatar.gov_info (user_id, password, enabled)
         VALUES (#{userId}, #{password}, #{enabled});
     </insert>
 

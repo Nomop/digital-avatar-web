@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 @Data
-@TableName("gov_user")
+@TableName("gov_info")
 public class GovUser extends BasicUserInfo{
 
     @TableId(value = "id", type = IdType.AUTO)
