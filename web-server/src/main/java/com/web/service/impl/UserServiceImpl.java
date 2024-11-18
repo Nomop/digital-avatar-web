@@ -73,15 +73,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, GovUser> implements
             throw new BusinessException(ResultCode.USER_ALREADY_EXISTS);
         }
 
-        //TODO:uid生成
-        long timestamp = Instant.now().toEpochMilli(); // 当前时间戳
-        int randomNum = new Random().nextInt(10000); // 0-9999 的随机数
+        String userUid = UUID.randomUUID().toString();
 
         //插入数据
         BasicUserInfo basicUserInfo = new BasicUserInfo();
         basicUserInfo.setUserName(newUser.getPhone());
         basicUserInfo.setUserPhone(newUser.getPhone());
-        basicUserInfo.setUserUid(timestamp + String.format("%04d", randomNum));
+        basicUserInfo.setUserUid(userUid);
         basicUserInfo.setUserIdentity(0);
         basicUserInfo.setUserSex(2);
         basicUserInfo.setUserRegTime(LocalDateTime.now());
