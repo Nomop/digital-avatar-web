@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/auth")
-@Api("登录注册登出接口")
+@Api("身份验证接口")
 public class AuthController {
 
     @Autowired
