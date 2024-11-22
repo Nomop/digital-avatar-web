@@ -2,28 +2,25 @@ package com.web.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.web.domain.GovUser;
-import com.web.vo.LoginVo;
-import com.web.vo.RegisterVo;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-
-import java.util.List;
+import com.web.dto.LoginDto;
+import com.web.dto.RegisterDto;
 
 public interface UserService extends IService<GovUser> {
 
 
     /**
      * 登录
-     * @param vo
+     * @param loginDto
      * @return
      */
-    String login(LoginVo vo);
+    String login(LoginDto loginDto);
 
     /**
      * 注册
      * @param newUser
      * @return
      */
-    String register(RegisterVo newUser);
+    String register(RegisterDto newUser);
 
     /**
      * 根据账号获取用户信息

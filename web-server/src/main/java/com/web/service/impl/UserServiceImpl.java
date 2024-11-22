@@ -1,6 +1,5 @@
 package com.web.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.web.constant.ResultCode;
 import com.web.dao.BasicUserInfoMapper;
@@ -11,9 +10,8 @@ import com.web.domain.GovUser;
 import com.web.exception.BusinessException;
 import com.web.service.UserService;
 import com.web.util.JwtUtil;
-import com.web.vo.LoginVo;
-import com.web.vo.RegisterVo;
-import org.springframework.beans.BeanUtils;
+import com.web.dto.LoginDto;
+import com.web.dto.RegisterDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -24,7 +22,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -49,16 +46,16 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, GovUser> implements
 
     @Transactional
     @Override
-    public String login(LoginVo vo) {
+    public String login(LoginDto loginDto) {
         // 判断用户
-        GovUser user = userMapper.selectGovUserByPhone(vo.getPhone());
+        GovUser user = userMapper.selectGovUserByPhone(loginDto.getPhone());
         Optional.ofNullable(user).orElseThrow(() -> new BusinessException(ResultCode.USER_NOT_FOUND));
-        boolean matches = passwordEncoder.matches(vo.getPassword(), user.getPassword());
+        boolean matches = passwordEncoder.matches(loginDto.getPassword(), user.getPassword());
         if (!matches) {
             throw new BusinessException(ResultCode.USER_CREDENTIALS_ERROR);
         }
         // 组装Authentication
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(vo.getPhone(), vo.getPassword());
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginDto.getPhone(), loginDto.getPassword());
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token = jwtUtil.generateToken(user);
@@ -66,7 +63,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, GovUser> implements
     }
 
     @Transactional
-    public String register(RegisterVo newUser) {
+    public String register(RegisterDto newUser) {
         // 检查账号是否已存在
         GovUser existingUser = userMapper.selectGovUserByPhone(newUser.getPhone());
         if (existingUser != null) {
