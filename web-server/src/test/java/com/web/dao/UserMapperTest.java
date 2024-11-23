@@ -17,10 +17,12 @@ import java.util.List;
 @SpringBootTest(classes = DigitalAvatarApplication.class)
 public class UserMapperTest {
 
-
+    @Autowired
+    private UserMapper userMapper;
 
     @Test
     public void select() {
-
+        GovUser list = userMapper.selectGovUserById(1);
+        System.out.println(list);
     }
 }
