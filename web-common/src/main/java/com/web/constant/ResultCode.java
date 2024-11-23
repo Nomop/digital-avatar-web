@@ -43,12 +43,15 @@ public enum ResultCode {
     USER_ACCOUNT_ALREADY_EXIST(2008, "账号已存在"),
     USER_ACCOUNT_USE_BY_OTHERS(2009, "账号下线"),
     USER_NOT_FOUND(2010, "用户不存在"),
-    USER_ALREADY_EXISTS(2011,"用户名已存在") ,
+    USER_ALREADY_EXISTS(2011,"用户已存在") ,
 
     TOKEN_INVALID(3001, "token无效"),
     TOKEN_TIMEOUT(3002, "token已过期"),
 
-    CAPTCHA_ERR(4001, "验证码错误");
+    AUTHCODE_ERR(4001, "验证码错误"),
+    AUTHCODE_OUT(4001, "验证码过期");
+
+
 
     /**
      * 返回码

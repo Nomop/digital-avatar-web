@@ -1,5 +1,6 @@
 package com.web.controller;
 
+import com.web.dto.LoginByCodeDto;
 import com.web.dto.WebResult;
 import com.web.service.UserService;
 import com.web.util.JwtUtil;
@@ -25,11 +26,13 @@ public class AuthController {
 
     @PostMapping("/login")
     public WebResult login(@RequestBody @Validated LoginDto loginDto) {
-        // 判断验证码，写死，不要学
-        if (!"1234".equals(loginDto.getCode())) {
-            return WebResult.error("验证码错误");
-        }
         String token = userService.login(loginDto);
+        return WebResult.success((Object) token);
+    }
+
+    @PostMapping("/loginByCode")
+    public WebResult loginByCode(@RequestBody @Validated LoginByCodeDto loginDto) {
+        String token = userService.loginByCode(loginDto);
         return WebResult.success((Object) token);
     }
 
@@ -37,6 +40,12 @@ public class AuthController {
     public WebResult register(@RequestBody RegisterDto newUser){
         String token = userService.register(newUser);
         return WebResult.success((Object) token);
+    }
+
+    @PostMapping("/sendAuthCode")
+    public WebResult sendAuthCode(String phone){
+        userService.sendAuthCode(phone);
+        return WebResult.success();
     }
 
     @PostMapping("/logout")

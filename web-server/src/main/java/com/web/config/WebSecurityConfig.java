@@ -69,8 +69,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 // 放行与拦截接口
                 .and().authorizeRequests()
-                .antMatchers("/auth/login").permitAll()
-                .antMatchers("/auth/register").permitAll()
+                .antMatchers("/auth/*").permitAll()
                 .antMatchers("/doc.html").permitAll()
                 .anyRequest().authenticated();
     }

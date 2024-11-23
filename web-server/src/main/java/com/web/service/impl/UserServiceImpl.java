@@ -7,11 +7,13 @@ import com.web.dao.UserMapper;
 import com.web.domain.BasicUserInfo;
 import com.web.domain.GovUser;
 
+import com.web.dto.LoginByCodeDto;
 import com.web.exception.BusinessException;
 import com.web.service.UserService;
 import com.web.util.JwtUtil;
 import com.web.dto.LoginDto;
 import com.web.dto.RegisterDto;
+import com.web.util.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -43,6 +45,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, GovUser> implements
     @Autowired
     private AuthenticationManagerBuilder authenticationManagerBuilder;
 
+    @Autowired
+    RedisUtil redisUtil;
+
 
     @Transactional
     @Override
@@ -63,11 +68,22 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, GovUser> implements
     }
 
     @Transactional
+    @Override
+    public String loginByCode(LoginByCodeDto loginByCodeDto){
+        String token = "1";
+        return token;
+    }
+
+    @Transactional
     public String register(RegisterDto newUser) {
-        // 检查账号是否已存在
-        GovUser existingUser = userMapper.selectGovUserByPhone(newUser.getPhone());
-        if (existingUser != null) {
-            throw new BusinessException(ResultCode.USER_ALREADY_EXISTS);
+
+        String key = "register:AuthCode:"+newUser.getPhone()+":";
+
+        //检验验证码内容和时间
+        Object data = redisUtil.get(key);
+        String authcode = data == null ? null : data.toString();
+        if(!authcode.equals(newUser.getCode())){
+            throw new BusinessException(ResultCode.AUTHCODE_ERR);
         }
 
         String userUid = UUID.randomUUID().toString();
@@ -96,6 +112,25 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, GovUser> implements
         SecurityContextHolder.getContext().setAuthentication(authenticationToken);
         String token = jwtUtil.generateToken(newGovUser);
         return token;
+    }
+
+    @Override
+    public void sendAuthCode(String phone){
+        //检查用户是否已注册
+        BasicUserInfo user = basicUserInfoMapper.selectByPhone(phone);
+        if(user != null) {
+            throw new BusinessException(ResultCode.USER_ALREADY_EXISTS);
+        }
+        
+        Random random = new Random();
+        String code = String.format("%04d", random.nextInt(10000));
+
+
+        //TODO:给指定手机号发送验证码
+
+        String key = "register:AuthCode:"+phone+":";
+        redisUtil.set(key,code,120);
+
     }
 
 

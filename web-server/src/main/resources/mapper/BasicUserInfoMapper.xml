@@ -5,4 +5,10 @@
         INSERT INTO avatar.basis_user_info (user_uid, user_identity, user_phone, user_name, user_sex, user_age, user_avatar, user_reg_time)
         VALUES (#{userUid}, #{userIdentity}, #{userPhone}, #{userName}, #{userSex}, #{userAge}, #{userAvatar}, #{userRegTime});
     </insert>
+
+    <select id="selectByPhone" parameterType="String" resultType="BasicUserInfo">
+        SELECT id, user_uid, user_identity, user_phone, user_name, user_sex, user_age, user_avatar, user_reg_time
+        FROM avatar.basis_user_info
+        WHERE user_phone = #{phone};
+    </select>
 </mapper>
