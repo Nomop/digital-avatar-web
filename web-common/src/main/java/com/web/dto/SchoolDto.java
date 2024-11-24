@@ -1,10 +1,11 @@
 package com.web.dto;
 
+import lombok.Data;
+
 import java.util.List;
 
+@Data
 public class SchoolDto {
-
-    private String schoolUuid;
 
     private String schoolName;
 

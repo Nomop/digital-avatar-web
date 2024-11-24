@@ -14,8 +14,8 @@ public class Class {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    @TableField("class_name")
-    private String className;
+    @TableField("class_name")//第几班
+    private Integer className;
 
     @TableField("class_size")
     private Integer classSize;

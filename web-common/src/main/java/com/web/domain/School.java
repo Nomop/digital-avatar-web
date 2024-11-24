@@ -14,25 +14,25 @@ public class School {
     private Integer id;
 
     @TableField("school_uuid")
-    private String schoolUuid; // 学校的唯一标识符(UUID)
+    private String schoolUuid;
 
     @TableField("school_name")
-    private String schoolName; // 学校名称
+    private String schoolName;
 
     @TableField("school_address")
-    private String schoolAddress; // 学校地址
+    private String schoolAddress;
 
     @TableField("total_students")
-    private Integer totalStudents; // 学校的总学生人数
+    private Integer totalStudents;
 
     @TableField("school_leader")
-    private String schoolLeader; // 学校负责人名称
+    private String schoolLeader;
 
     @TableField("leader_phone")
-    private String leaderPhone; // 负责人联系方式
+    private String leaderPhone;
 
     @TableField("organization")
-    private String organization; // 学校所属的组织名称
+    private String organization;
 
     @TableField("school_type")
     private String schoolType; // 学校类型（Primary/Junior/Senior）
