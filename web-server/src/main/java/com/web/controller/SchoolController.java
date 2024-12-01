@@ -1,8 +1,10 @@
 package com.web.controller;
 
 import com.web.domain.School;
+import com.web.dto.PageQueryDto;
 import com.web.dto.SchoolDto;
-import com.web.dto.WebResult;
+import com.web.vo.PageResult;
+import com.web.vo.WebResult;
 import com.web.service.SchoolService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -59,10 +61,10 @@ public class SchoolController {
         return WebResult.success(schools);
     }
 
-    @ApiOperation("获取所有院校信息及班级列表")
-    @GetMapping("/list")
-    public WebResult<List<School>> getAllSchools() {
-        List<School> schools = schoolService.getAllSchools();
-        return WebResult.success(schools);
+    @ApiOperation("分页加载院校信息")
+    @GetMapping("/page")
+    public WebResult<List<School>> getAllSchools(@RequestBody PageQueryDto pageQuery) {
+        PageResult pageResult = schoolService.pageQuery(pageQuery);
+        return WebResult.success(pageResult);
     }
 }

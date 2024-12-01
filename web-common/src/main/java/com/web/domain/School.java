@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 @Data
-@TableName("school")
+@TableName("school_info")
 public class School {
 
     @TableId(value = "id", type = IdType.AUTO)

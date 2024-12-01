@@ -1,6 +1,9 @@
 package com.web.service;
 
 import com.web.domain.Class;
+import com.web.dto.ClassPageQueryDto;
+import com.web.dto.PageQueryDto;
+import com.web.vo.PageResult;
 
 import java.util.List;
 
@@ -42,12 +45,12 @@ public interface ClassService {
     boolean updateClass(Class classInfo);
 
     /**
-     * 查询某个院校下的所有班级列表。
+     * 分页加载某个院校下的班级列表。
      *
-     * @param schoolUuid 院校的唯一标识符
+     * @param pageQuery 分页请求
      * @return 班级列表
      */
-    List<Class> getClassesBySchool(String schoolUuid);
+    PageResult getClassesPageQuery(ClassPageQueryDto pageQuery);
 
     /**
      * 根据院校和班级，查询指定的班级。

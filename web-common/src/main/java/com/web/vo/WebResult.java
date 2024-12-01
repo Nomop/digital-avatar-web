@@ -1,4 +1,4 @@
-package com.web.dto;
+package com.web.vo;
 
 import com.web.constant.ResultCode;
 import lombok.AllArgsConstructor;

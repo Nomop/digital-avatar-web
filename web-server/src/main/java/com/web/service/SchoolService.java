@@ -2,7 +2,9 @@ package com.web.service;
 
 
 import com.web.domain.School;
+import com.web.dto.PageQueryDto;
 import com.web.dto.SchoolDto;
+import com.web.vo.PageResult;
 
 import java.util.List;
 
@@ -40,10 +42,10 @@ public interface SchoolService {
     List<School> searchSchoolByName(String schoolName);
 
     /**
-     * 返回所有院校信息，包括班级列表。
+     * 分页加载院校信息
      *
-     * @return 所有院校及其班级信息
+     * @return 所有院校
      */
-    List<School> getAllSchools();
+    PageResult pageQuery(PageQueryDto pageQuery);
 
 }

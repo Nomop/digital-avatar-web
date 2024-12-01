@@ -1,6 +1,6 @@
 package com.web.controller;
 
-import com.web.dto.WebResult;
+import com.web.vo.WebResult;
 import com.web.service.ChatService;
 import com.web.service.ParentUserService;
 import io.swagger.annotations.Api;

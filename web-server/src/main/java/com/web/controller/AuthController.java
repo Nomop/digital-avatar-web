@@ -1,7 +1,7 @@
 package com.web.controller;
 
 import com.web.dto.LoginByCodeDto;
-import com.web.dto.WebResult;
+import com.web.vo.WebResult;
 import com.web.service.UserService;
 import com.web.util.JwtUtil;
 import com.web.dto.LoginDto;

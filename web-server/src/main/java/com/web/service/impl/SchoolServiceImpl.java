@@ -1,14 +1,18 @@
 package com.web.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.web.dao.ClassMapper;
 import com.web.dao.SchoolMapper;
 import com.web.domain.Class;
 import com.web.domain.School;
+import com.web.dto.PageQueryDto;
 import com.web.dto.SchoolDto;
 import com.web.service.ClassService;
 import com.web.service.SchoolService;
+import com.web.vo.PageResult;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -87,7 +91,11 @@ public class SchoolServiceImpl extends ServiceImpl<SchoolMapper, School> impleme
     }
 
     @Override
-    public List<School> getAllSchools() {
-        return this.list();
+    public PageResult pageQuery(PageQueryDto pageQuery) {
+        Page<School> page = new Page<>(pageQuery.getPage(), pageQuery.getPageSize(), true);
+        Page<School> schoolPage = this.page(page);
+        long total = schoolPage.getTotal();
+        PageResult pageResult = new PageResult(total, schoolPage.getRecords());
+        return pageResult;
     }
 }

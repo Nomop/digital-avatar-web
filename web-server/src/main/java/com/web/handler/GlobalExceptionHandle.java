@@ -1,10 +1,9 @@
 package com.web.handler;
 
 import com.web.constant.ResultCode;
-import com.web.dto.WebResult;
+import com.web.vo.WebResult;
 import com.web.exception.BusinessException;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;

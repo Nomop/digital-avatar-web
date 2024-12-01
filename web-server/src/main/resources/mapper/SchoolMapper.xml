@@ -3,7 +3,7 @@
 <mapper namespace="com.web.dao.SchoolMapper">
 
     <delete id="deleteBySchoolUuid" parameterType="string">
-        DELETE FROM school WHERE school_uuid = #{schoolUuid}
+        DELETE FROM school_info WHERE school_uuid = #{schoolUuid}
     </delete>
 
 </mapper>

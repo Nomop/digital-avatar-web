@@ -2,7 +2,7 @@ package com.web.handler;
 
 import com.alibaba.fastjson.JSON;
 import com.web.constant.ResultCode;
-import com.web.dto.WebResult;
+import com.web.vo.WebResult;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
